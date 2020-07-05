@@ -10,6 +10,8 @@ start_time = 0.0
 stop_time = 0.0
 max_steps = 0
 
+print_int = 20
+plot_int = 20
 
 freq_plasma = 0.0
 q = 0.0
