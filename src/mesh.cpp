@@ -40,12 +40,16 @@ void mesh::CleanData(){
 void mesh::growGhost(){
     source.insert(source.begin(), source.back());
     source.push_back(source[1]);
+    cellCntr[0].insert(cellCntr[0].begin(), lo[0] - dx[0]/2);
+    cellCntr[0].push_back(hi[0] + dx[0]/2);
     data.insert(data.begin(), data.back());
     data.push_back(data[1]);
 }
 void mesh::shrinkGhost(){
     source.erase(source.begin());
     source.pop_back();
+    cellCntr[0].erase(cellCntr[0].begin());
+    cellCntr[0].pop_back();
     data.erase(data.begin());
     data.pop_back();
 

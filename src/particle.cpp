@@ -48,7 +48,7 @@ void particle::moveParticle(){
 		if (pos[i] < PIC.lo[i]){
 			pos[i] += PIC.hi[i] - PIC.lo[i];
 		}
-		else if (pos[i] > PIC.hi[i]) {
+		else if (pos[i] >= PIC.hi[i]) {
 			pos[i] -= PIC.hi[i] - PIC.lo[i];
 		}
 	}
@@ -57,9 +57,25 @@ void particle::moveParticle(){
 // 1D only
 void particle::particleToGrid(mesh & grid){
 	for (int idim = 0; idim < PIC.dim; idim ++){
-		for (std::vector<double>::size_type i = 0; i != grid.data.size(); i++){
+		for (std::vector<double>::size_type i = 0; i != grid.source.size(); i++){
 			std::vector<double> xprime = {grid.cellCntr[idim][i] - pos[idim]};
 			grid.source[i] += q * interpFnc(xprime);
+		}
+
+		//if particle is in the last cell, it adds to the first cell's source
+		if (pos[idim] > grid.hi[0]-grid.dx[0]/2){
+			std::vector<double> xprime = {grid.hi[0] + grid.dx[0]/2 - pos[idim]};
+
+			grid.source[0] += q * interpFnc(xprime);
+				
+		}
+		// if particle is in the first cell, it adds to the last cell's source
+		else if (pos[idim] < grid.lo[0]+grid.dx[0]/2){
+			
+			std::vector<double> xprime = {grid.lo[0] - grid.dx[0]/2 - pos[idim]};
+			
+			grid.source[grid.nCells[0]-1] += q * interpFnc(xprime);	
+			
 		}
 	}
 }
@@ -152,6 +168,9 @@ void particleContainer::particlesToGrid(mesh & grid){
 	for (double & s : grid.source){
 		s = s/grid.V + PIC.rho_back;
 	}
+
+	//grid.source[0] = grid.source[1];
+	//grid.source[grid.source.size()-1] = grid.source[grid.source.size()-2];
 
 }
 
