@@ -3,6 +3,8 @@
 #include<vector>
 #include<iostream>
 #include "setup.h"
+#include "mesh.h"
+#include <fstream>
 
 #ifndef io_h
 #define io_h
@@ -24,6 +26,8 @@ namespace PIC_IO
 			std::cout << std::endl;
 		}
     }
+
+	void writeFile(std::vector<double> data);
 }
 
 
