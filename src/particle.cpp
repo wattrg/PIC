@@ -104,7 +104,7 @@ double particle::bspline(double zeta, int l){
 		}
 	
 	default:
-		break;
+		return 0.0;
 	}
 }
 
