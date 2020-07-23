@@ -1,5 +1,5 @@
 # PIC
-PIC uses the Particle In Cell method to simulate kinetic plasmas.
+PIC uses the Particle In Cell method to simulate kinetic plasmas. Part of my project for PHYS3051
 
 ## Running the code
 ### Download
