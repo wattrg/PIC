@@ -1,14 +1,17 @@
+# executable base name
+EXE         := PIC
+
 #Compiler and Linker
 CC          := g++
 
 #The Target Binary Program
-TARGET      := PIC
+TARGET      := $(EXE)
 
 #The Directories, Source, Includes, Objects, Binary and Resources
 SRCDIR      := src
 INCDIR      := inc
-BUILDDIR    := obj
 TARGETDIR   := bin
+BUILDDIR    := $(TARGETDIR)/obj
 RESDIR      := res
 SRCEXT      := cpp
 DEPEXT      := d
@@ -22,6 +25,14 @@ INC         += -I$(INCDIR)/lua-5.3.5/src/
 INC         += -I$(INCDIR)/LuaBridge/Source/LuaBridge/
 INC         += -I$(INCDIR)/LuaBridge/Source/
 INCDEP      := -I$(INCDIR)
+
+# debugging mode
+DEBUG            := FALSE
+ifeq ($(DEBUG), TRUE)
+	CFLAGS   += -g
+	TARGET   := $(EXE).debug
+	BUILDDIR := $(TARGETDIR)/obj_debug
+endif
 
 #---------------------------------------------------------------------------------
 #DO NOT EDIT BELOW THIS LINE
@@ -65,6 +76,8 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
 	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+
+
 
 #Non-File Targets
 .PHONY: all remake clean cleaner resources
