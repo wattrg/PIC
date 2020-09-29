@@ -9,18 +9,18 @@ SRCDIR      := src
 INCDIR      := inc
 BUILDDIR    := obj
 TARGETDIR   := bin
+RESDIR      := res
 SRCEXT      := cpp
 DEPEXT      := d
 OBJEXT      := o
 
 #Flags, Libraries and Includes
-CFLAGS      := -g
-LIB         := -L$(INCDIR)/lua-5.3.5/src/ -llua -ldl
+CFLAGS      := -Wall
+LIB         := -L$(INCDIR)/lua-5.3.5/src/ -llua -ldl 
 INC         := -I$(INCDIR) -I/usr/local/include
 INC         += -I$(INCDIR)/lua-5.3.5/src/
 INC         += -I$(INCDIR)/LuaBridge/Source/LuaBridge/
 INC         += -I$(INCDIR)/LuaBridge/Source/
-INC         += -I$(INCDIR)/LuaBridge/Source
 INCDEP      := -I$(INCDIR)
 
 #---------------------------------------------------------------------------------
