@@ -12,4 +12,4 @@ To compile PIC, run `make` in the home directory of the project. `make clean` wi
  
  ### Executing
  
-To execute the code run `../bin/PIC test.lua`. This will run the test simulation. This file can be editted to suit your needs. For convience, `run.sh` will remove any output files, then start a new simulation using `test.lua`.
+To execute the code run `../bin/PIC test.lua` from inside `PIC/exec`. This will run the test simulation. This file can be editted to suit your needs. For convience, `run.sh` will remove any output files, then start a new simulation using `test.lua`.
