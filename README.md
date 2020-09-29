@@ -6,10 +6,7 @@ PIC uses the Particle In Cell method to simulate kinetic plasmas. Part of my pro
 To download the code, clone this repository to your desired location. No external dependancies are required.
 
 ### Compiling
-To compile, cd into PIC/exec, and edit the 4th line of make.sh to `make [platform]` where `[platform]` corresponds to the operating system you're using, and is one of the following:
-  `"aix" "bsd" "c89" "freebsd" "generic" "linux" "macosx" "mingw" "posix" "solaris"`
-  
- Note that this has only been tested on Ubuntu, if this doesn't work on your platform please let me know.
+To compile run `make` in the home directory of the project. `make clean` will remove object files, and `make cleaner` will remove the target executable.
  
  ### Executing
  
