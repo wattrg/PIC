@@ -7,7 +7,6 @@
 #include "EM.h"
 #include <fstream>
 
-
 setup PIC;
 
 int main(int argc, char* argv[])

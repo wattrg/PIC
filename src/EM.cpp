@@ -34,7 +34,7 @@ void EM::poisson1D (std::vector<double> & phi, std::vector<double> & rho, double
 // 1D implementation
 void EM::phiToE (std::vector<double> & data, double dx){
     std::vector<double> phi (data);
-    for (int i = 1; i < data.size()+1; i++){
+    for (unsigned int i = 1; i < data.size()+1; i++){
         data[i] = -(phi[i+1] - phi[i-1])/(2 * dx);
     }
     

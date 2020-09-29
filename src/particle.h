@@ -8,7 +8,7 @@
 
 /*
 particle class
-/**/
+*/
 class particle {
 private:
 	std::string name;
@@ -39,7 +39,7 @@ public:
 
 /*
 container of particles
-/**/
+*/
 
 class particleContainer {
 public:

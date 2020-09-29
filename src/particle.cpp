@@ -42,8 +42,8 @@ void particle::moveParticle(){
 	// step the particle forward
 	advance::RK(this->pos, this->vel, PIC.dt);
 
-	// temporary periodic bc while I don't have proper \
-	boundary conditions
+	// temporary periodic bc while I don't have proper 
+	// boundary conditions
 	for (int i = 0; i < PIC.dim; i++){
 		if (pos[i] < PIC.lo[i]){
 			pos[i] += PIC.hi[i] - PIC.lo[i];

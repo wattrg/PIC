@@ -8,7 +8,7 @@
 /*
 Class to handle information about the sim
 (e.g. information from the lua file)
-/**/
+*/
 class setup {
 public:
 	

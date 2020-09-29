@@ -8,7 +8,7 @@ To download the code, clone this repository to your desired location. No externa
 ### Compiling
 First, make sure lua is compiled. To compile lua, cd into `inc/lua-5.3.5` and run `make PLATFORM` where `PLATFORM` is one of `aix` `bsd` `c89` `freebsd` `generic` `linux` `macosx` `mingw` `posix` `solaris`. If you are running windows, copy the pre-compiled binaries into `inc/lua/5.3.5/src` (I think, I haven't tried it).
 
-To compile PIC, run `make` in the home directory of the project. `make clean` will remove object files, and `make cleaner` will remove the target executable.
+To compile PIC, run `make` in the home directory of the project. `make clean` will remove object files, `make cleaner` will remove the target executable, and `make remake` will recompile from scratch, even if no changes to the source code have been made.
  
  ### Executing
  

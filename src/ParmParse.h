@@ -12,7 +12,7 @@ using namespace luabridge;
 /*
 Class which reads information from the lua scripts
 Uses LuaBridge to interface with lua
-/**/
+*/
 
 class ParmParse {
 private:
