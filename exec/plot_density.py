@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import sys
 
-plot_step = 2000
-max_step = 20000
+plot_step = 4000
+max_step = 40000
 dt = 0.000001
 
 

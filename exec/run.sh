@@ -1,3 +1,3 @@
 
 rm *.csv
-./PIC.ex test.lua
+../bin/PIC test.lua
