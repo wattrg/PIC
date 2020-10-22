@@ -10,7 +10,7 @@ dx = (hi[1] - lo[1])/n_cells[1]
 dt = 0.000001
 start_time = 0.0
 stop_time = 2.0
-max_steps = 40000
+max_steps = 10000
 
 print_int = 500
 plot_int = 1000
