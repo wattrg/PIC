@@ -1,4 +1,5 @@
 #include "setup.h"
+#include <mpi.h>
 
 void setup::readLua(char const * file){
 		ParmParse pp (file);
@@ -26,7 +27,19 @@ void setup::readLua(char const * file){
 }
 
 void setup::init(char const * file){
-    readLua(file);
+    setup();
+    if (file != NULL)
+    {
+        std::cout << "Initialising from " << file << "...    \n";
+        readLua(file);
+    }
+    else
+    {
+        std::cout << "No input file, terminating\n";
+        MPI_Finalize();
+        exit(0);
+    }
+    
     t = start_time;
     step = 0;
     dx.resize(dim);

@@ -2,7 +2,7 @@
 EXE         := PIC
 
 #Compiler and Linker
-CC          := mpiCC
+CC          := mpic++
 
 #The Target Binary Program
 TARGET      := $(EXE)

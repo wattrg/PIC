@@ -7,24 +7,25 @@
 #include "EM.h"
 #include <fstream>
 #include "advance.h"
-#include<mpi.h>
+#include <mpi.h>
 
 setup PIC;
 
 int main(int argc, char* argv[])
 {
+    
     // Initialise the MPI environment
-    MPI_Init(NULL, NULL);
+    MPI_Init(&argc, &argv);
 
-    int world_size;
+    int world_size, world_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
     std::cout << "MPI initialised with " << world_size << " processors" << std::endl;
 
 
 
     // Initialise the simulation
-    std::cout << "Initialising from " << argv[1] << "...    ";
     PIC.init(argv[1]);
     
     
@@ -36,7 +37,7 @@ int main(int argc, char* argv[])
     }
 
     mesh grid (PIC.lo, PIC.hi, PIC.n_cells);
-    std::cout << "Complete\n";
+    std::cout << "Problem initialised \n";
 
     // run the simulation
     advance::run(grid, pc); 
