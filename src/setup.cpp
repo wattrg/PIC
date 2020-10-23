@@ -30,7 +30,7 @@ void setup::init(char const * file){
     setup();
     if (file != NULL)
     {
-        std::cout << "Initialising from " << file << "...    \n";
+        std::cout << "Initialising from " << file << "...   ";
         readLua(file);
     }
     else
