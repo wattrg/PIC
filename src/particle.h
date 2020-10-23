@@ -40,7 +40,6 @@ public:
 /*
 container of particles
 */
-
 class particleContainer {
 public:
 	int np;

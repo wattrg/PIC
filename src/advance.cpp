@@ -80,5 +80,5 @@ void advance::run (mesh grid, particleContainer pc)
         }
     
     }
-    std::cout << "Complete" << std::endl;
+    std::cout << "Simulation complete" << std::endl;
 }
