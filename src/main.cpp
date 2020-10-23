@@ -7,22 +7,11 @@
 #include "EM.h"
 #include <fstream>
 #include "advance.h"
-#include<mpi.h>
 
 setup PIC;
 
 int main(int argc, char* argv[])
 {
-    // Initialise the MPI environment
-    MPI_Init(NULL, NULL);
-
-    int world_size;
-    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
-
-    std::cout << "MPI initialised with " << world_size << " processors" << std::endl;
-
-
-
     // Initialise the simulation
     std::cout << "Initialising from " << argv[1] << "...    ";
     PIC.init(argv[1]);
@@ -42,6 +31,5 @@ int main(int argc, char* argv[])
     advance::run(grid, pc); 
 
     
-    MPI_Finalize();
     
 }
