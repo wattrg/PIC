@@ -347,3 +347,5 @@ lua-5.3.5/src/luac
 lua-5.3.5/src/liblua.a
 *.csv
 *.png
+settings.json
+*.swp
