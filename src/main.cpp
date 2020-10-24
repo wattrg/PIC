@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     // I want to include this in PIC.init eventually
     particleContainer pc;
     for (int i = 0; i < PIC.nParticles; i++){
-        particle p("electron",PIC.pos_init[i], PIC.vel_init[i], & pc.shpFncParam, -1.0, 0.01);
+        particle p("electron",PIC.pos_init[i], PIC.vel_init[i], & pc.shpFncParam, PIC.q, PIC.m);
         pc.particles.push_back(p);
     }
 

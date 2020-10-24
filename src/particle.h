@@ -34,6 +34,8 @@ public:
 	double interpFnc(std::vector<double> xPrime);
 	void particleToGrid(mesh & grid);
 	void applyParticleForce(mesh & grid);
+
+	std::vector<double> getPos();
 };
 
 
@@ -52,6 +54,7 @@ public:
 	void moveParticles();
 	void particlesToGrid(mesh & grid);
 	void applyParticleForces(mesh & grid);
+	std::vector<double> getxPos();
 	void printPos();
 	void printVel();
 	

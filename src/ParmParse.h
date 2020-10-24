@@ -28,11 +28,17 @@ public:
     }
     
     template <typename T>
-    void readVariable(T & var, char const * name){
+    int readVariable(T & var, char const * name){
         LuaRef lua_var (L, new T);
         lua_var = getGlobal(L, name);
         if (!lua_var.isNil()){
             var = lua_var.cast<T>();
+            return 0;
+        }
+        else
+        {
+            std::cout << "Failed reading " << name << "from lua file \n";
+            return 1;
         }
     }
 };

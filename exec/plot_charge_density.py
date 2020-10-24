@@ -5,7 +5,7 @@ import sys
 
 plot_step = 10
 max_step = 100
-dt = 0.001
+dt = 0.01
 
 
 names = np.append(1, np.arange(plot_step,max_step,plot_step))
@@ -20,7 +20,7 @@ fig, ax = plt.subplots(len(names), sharex='col', sharey='row')
 
 
 for i in range(len(names)):
-    ax[i].hist(rhos[i],bins=100)
+    ax[i].plot(xs, rhos[i])
     ax[i].set_ylabel("t = {:.3f}".format(dt * names[i]))
 
 plt.show()

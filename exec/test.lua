@@ -1,24 +1,24 @@
 verbose = 0
 
 dim = 1
-nParticles = 500
+nParticles = 1000
 n_cells = {50}
 lo = {0.0}
 hi = {1.0}
 dx = (hi[1] - lo[1])/n_cells[1]
 
-dt = 0.000001
+dt = 0.001
 start_time = 0.0
 stop_time = 2.0
-max_steps = 10000
+max_steps = 100
 
-print_int = 500
-plot_int = 1000
+print_int = 10
+plot_int = 10
 
 
 freq_plasma = 1.0
-q = -0.1
-m = 0.1
+q = -1
+m = 0.01
 
 verbose = 1
 rho_back = -q * nParticles/dx
@@ -37,9 +37,8 @@ for idim = 1, dim do
     L = hi[idim]-lo[idim]
     for i = 1,nParticles do
         pos_nom = lo[idim] + (i-0.5) * dp
-        pos_pert = L/nParticles * math.sin(2 * math.pi * pos_nom/L*1)
+        pos_pert = 100* L/nParticles * math.sin(2 * math.pi * pos_nom/L*1)
         pos = pos_nom + pos_pert
-        --print(pos)
 
         if pos > L then
             pos = pos_init - L

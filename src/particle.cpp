@@ -142,6 +142,11 @@ void particle::applyParticleForce(mesh & grid){
 
 }
 
+std::vector<double> particle::getPos()
+{
+	return this->pos;
+}
+
 
 
 particleContainer::particleContainer () {
@@ -187,6 +192,16 @@ void particleContainer::printPos(){
 		std::cout << ", ";
 	}
 	std::cout << "]" << std::endl;
+}
+
+std::vector<double> particleContainer::getxPos()
+{
+	std::vector<double> ps;
+	for (particle & p : particles)
+	{
+		ps.push_back(p.getPos()[0]);
+	}
+	return ps;
 }
 
 void particleContainer::printVel(){

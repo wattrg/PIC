@@ -9,17 +9,16 @@ void EM::poisson1D (std::vector<double> & phi, std::vector<double> & rho, double
     std::vector<double> row (n, -1.0);
     std::vector<std::vector<double>> mat (n, row);
 
-    // construct inverse poisson matrix
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-            if (i == j){
-                mat[i][j] = 1.0;
-            }
-            else if (j == i+1 || j == i-1){
-                mat[i][j] = -2.0;
-            }
-        }
+    mat[0][0] = 1.0;
+    mat[0][1] = -2.0;
+    for (int i = 1; i < n-1; i++)
+    {
+        mat[i][i-1] = -2.0;
+        mat[i][i] = 1.0;
+        mat[i][i-1] = -2.0;
     }
+    mat[n-1][n-1] = 1.0;
+    mat[n-1][n-2] = -2.0;
     
     // perform the matrix multiplication
     // to calculate the electric potential

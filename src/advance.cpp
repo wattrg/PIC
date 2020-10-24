@@ -39,6 +39,7 @@ void advance::run (mesh grid, particleContainer pc)
     while (PIC.t < PIC.max_time && PIC.step < PIC.max_steps){
         // PIC step 1: update particle position
         pc.moveParticles();
+        //pc.printPos();
 
 
 
@@ -48,7 +49,6 @@ void advance::run (mesh grid, particleContainer pc)
         pc.particlesToGrid(grid); // grid.source now stores charge density
         
         //PIC_IO::printVec(grid.source);
-        //pc.printPos();
 
         // PIC step 3: compute electric field
         grid.growGhost();
@@ -76,6 +76,7 @@ void advance::run (mesh grid, particleContainer pc)
         }
 
         if (PIC.step % PIC.plot_int == 0 || PIC.step == 1){
+            //PIC_IO::writeFile(pc.getxPos());
             PIC_IO::writeFile(grid.source);
         }
     
