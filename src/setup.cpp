@@ -1,5 +1,4 @@
 #include "setup.h"
-#include <mpi.h>
 
 void setup::readLua(char const * file){
 		ParmParse pp (file);
@@ -36,7 +35,6 @@ void setup::init(char const * file){
     else
     {
         std::cout << "No input file, terminating\n";
-        MPI_Finalize();
         exit(0);
     }
     

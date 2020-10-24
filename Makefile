@@ -2,10 +2,16 @@
 EXE         := PIC
 
 #Compiler and Linker
-CC          := mpic++
+CC          := g++
 
 #The Target Binary Program
 TARGET      := $(EXE)
+
+# debugging mode
+DEBUG            := TRUE
+
+# parrallel
+OMP := FALSE
 
 #The Directories, Source, Includes, Objects, Binary and Resources
 SRCDIR      := src
@@ -18,7 +24,7 @@ DEPEXT      := d
 OBJEXT      := o
 
 #Flags, Libraries and Includes
-CFLAGS      := -Wall
+CFLAGS      := -Wall 
 LIB         := -L$(INCDIR)/lua-5.3.5/src/ -llua -ldl 
 INC         := -I$(INCDIR) -I/usr/local/include
 INC         += -I$(INCDIR)/lua-5.3.5/src/
@@ -26,17 +32,25 @@ INC         += -I$(INCDIR)/LuaBridge/Source/LuaBridge/
 INC         += -I$(INCDIR)/LuaBridge/Source/
 INCDEP      := -I$(INCDIR)
 
-# debugging mode
-DEBUG            := FALSE
-ifeq ($(DEBUG), TRUE)
-	CFLAGS   += -g
-	TARGET   := $(EXE).debug
-	BUILDDIR := $(TARGETDIR)/obj_debug
-endif
+
+
 
 #---------------------------------------------------------------------------------
 #DO NOT EDIT BELOW THIS LINE
 #---------------------------------------------------------------------------------
+
+# set debugging info
+ifeq ($(DEBUG), TRUE)
+	CFLAGS   += -g
+	TARGET   := $(TARGET)db
+	BUILDDIR := $(TARGETDIR)/obj_debug
+endif
+
+ifeq ($(OMP), TRUE)
+	CFLAGS += -fopenmp
+	TARGET := $(TARGET)omp
+endif
+
 SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
@@ -65,10 +79,10 @@ cleaner: clean
 
 #Link
 $(TARGET): $(OBJECTS)
-	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
+	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB) $(CFLAGS)
 
 #Compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)

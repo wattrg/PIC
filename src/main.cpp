@@ -7,23 +7,21 @@
 #include "EM.h"
 #include <fstream>
 #include "advance.h"
-#include <mpi.h>
+
+#ifdef _OPENMP
+#include <omp.h>
+#endif // OMP
+
 
 setup PIC;
 
 int main(int argc, char* argv[])
 {
-    
-    // Initialise the MPI environment
-    MPI_Init(&argc, &argv);
-
-    int world_size, world_rank;
-    MPI_Comm_size(MPI_COMM_WORLD, &world_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
-
-    std::cout << "MPI initialised with " << world_size << " processors" << std::endl;
-
-
+#ifdef _OPENMP
+    omp_set_num_threads(2);
+    std::cout << "Using openMP" << std::endl;
+#endif // OMP
+ 
 
     // Initialise the simulation
     PIC.init(argv[1]);
@@ -31,10 +29,16 @@ int main(int argc, char* argv[])
     
     // I want to include this in PIC.init eventually
     particleContainer pc;
-    for (int i = 0; i < PIC.nParticles; i++){
-        particle p("electron",PIC.pos_init[i], PIC.vel_init[i], & pc.shpFncParam, -1.0, 0.01);
-        pc.particles.push_back(p);
-    }
+    pc.particles.resize(PIC.nParticles);
+#ifdef _OPENMP
+    #pragma omp parallel for
+#endif // OMP
+        for (int i = 0; i < PIC.nParticles; i++)
+        {
+            particle p("electron",PIC.pos_init[i], PIC.vel_init[i], & pc.shpFncParam, -1.0, 0.01);
+            //pc.particles.push_back(p);
+            pc.particles[i] = p;
+        }
 
     mesh grid (PIC.lo, PIC.hi, PIC.n_cells);
     std::cout << "Problem initialised \n";
@@ -43,6 +47,5 @@ int main(int argc, char* argv[])
     advance::run(grid, pc); 
 
     
-    MPI_Finalize();
     
 }

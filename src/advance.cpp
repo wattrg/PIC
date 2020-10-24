@@ -7,21 +7,26 @@ std::vector<double> advance::multiplyVecConstant(std::vector<double> & vec, doub
 {
     std::vector<double> result;
     int length = vec.size();
-    for (int i = 0; i < length; i++){
-        result.push_back(vec[i] * c);
-    }
+    result.resize(length);
+#ifdef _OPENMP
+    #pragma omp parallel for
+#endif
+        for (int i = 0; i < length; i++){
+            result[i] = (vec[i] * c);
+        }
     return result;
 }
 
 std::vector<double> advance::addVecVec (std::vector<double>  vec1, std::vector<double>  vec2){
     std::vector<double> result;
     int length = vec1.size();
-    for (int i = 0; i < length; i++){
-        result.push_back(vec1[i] + vec2[i]);
-    }
-    // PIC_IO::printVec(vec1); std::cout << "+" << std::endl;
-    // PIC_IO::printVec(vec2); std::cout << "=" << std::endl;
-    // PIC_IO::printVec(result);
+    result.resize(length);
+#ifdef _OPENMP
+    #pragma omp parallel for
+#endif
+        for (int i = 0; i < length; i++){
+            result[i] = (vec1[i] + vec2[i]);
+        }
     return result;
 }
 
