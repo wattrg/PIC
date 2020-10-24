@@ -147,7 +147,10 @@ void particle::applyParticleForce(mesh & grid){
 particleContainer::particleContainer () {
 	np = PIC.nParticles;
 	shpFncParam = 0;
+	this->particles.resize(np);
 }
+
+
 
 void particleContainer::moveParticles() {
 	for (int i = 0; i < np; i++){

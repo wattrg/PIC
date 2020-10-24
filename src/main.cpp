@@ -28,23 +28,22 @@ int main(int argc, char* argv[])
     
     
     // I want to include this in PIC.init eventually
-    particleContainer pc;
-    pc.particles.resize(PIC.nParticles);
+    particleContainer * pc = new particleContainer;
 #ifdef _OPENMP
     #pragma omp parallel for
 #endif // OMP
         for (int i = 0; i < PIC.nParticles; i++)
         {
-            particle p("electron",PIC.pos_init[i], PIC.vel_init[i], & pc.shpFncParam, -1.0, 0.01);
+            particle p("electron",PIC.pos_init[i], PIC.vel_init[i], &(*pc).shpFncParam, PIC.q, PIC.m);
             //pc.particles.push_back(p);
-            pc.particles[i] = p;
+            (*pc).particles[i] = p;
         }
 
     mesh grid (PIC.lo, PIC.hi, PIC.n_cells);
     std::cout << "Problem initialised \n";
 
     // run the simulation
-    advance::run(grid, pc); 
+    advance::run(&grid, pc); 
 
     
     
